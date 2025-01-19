@@ -1,29 +1,29 @@
-import { CloudRain } from "lucide-react";
+import { ChartNoAxesCombined, CircleDollarSign, Layers, UserPlus } from "lucide-react";
 
 const features = [
   {
     name: "Sign up for free",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
-    icon: CloudRain,
+      "Get started on your blogging journey without any cost! Where you can create one site absolutely free and start sharing your Multiple ideas today.",
+    icon: UserPlus,
   },
   {
-    name: "Balzing fast",
+    name: "Startup Plan",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
-    icon: CloudRain,
+      "Unlock monetization opportunities with the Startup plan. For just $5, you can sell your apps and courses effortlessly, turning your expertise into earnings.",
+    icon: CircleDollarSign,
   },
   {
-    name: "Super secure with Kinde",
+    name: "Earn More",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
-    icon: CloudRain,
+      "The more visitors you attract to your URL, the higher your income potential. Earn based on the traffic!",
+    icon: ChartNoAxesCombined,
   },
   {
-    name: "Easy to use",
+    name: "Premium Plus, Multiply Earnings!",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
-    icon: CloudRain,
+      "Scale your success with the Premium Plus plan. Create multiple websites and maximize your revenue streams, all based on the performance",
+    icon: Layers,
   },
 ];
 

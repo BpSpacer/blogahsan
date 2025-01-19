@@ -8,6 +8,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
 import HeroImage from "@/public/hero.png";
+import HeroSmall from '@/public/herosm.png';
 
 export function Hero() {
   return (
@@ -120,11 +121,20 @@ export function Hero() {
               </defs>
             </svg>
 
+            {/* Hero Image for larger screens */}
             <Image
               src={HeroImage}
               alt="Hero image"
               priority
-              className="relative object-cover w-full border rounded-lg shadow-2xl lg:rounded-2xl"
+              className="relative object-cover w-full border rounded-lg shadow-2xl lg:rounded-2xl hidden md:block"
+            />
+
+            {/* Hero Small Image for mobile */}
+            <Image
+              src={HeroSmall}
+              alt="Hero small image"
+              priority
+              className="relative object-cover w-full border rounded-xl shadow-2xl lg:rounded-2xl md:hidden"
             />
           </div>
         </div>

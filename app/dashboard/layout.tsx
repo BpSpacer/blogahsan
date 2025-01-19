@@ -37,12 +37,12 @@ export const navLinks = [
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <section className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <div className="hidden border-r bg-muted/40 md:block">
+      {/* Sidebar */}
+      <div className="border-r bg-muted/40 md:block lg:flex flex-col lg:w-[280px]">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Image src={Logo} alt="Logo" className="size-8" />
-
+              <Image src={Logo} alt="Logo" className="size-8" />
               <h3 className="text-2xl">
                 Blog<span className="text-primary">Ahsan</span>
               </h3>
@@ -57,9 +57,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
 
-      <div className="flex flex-col">
+      {/* Main Content */}
+      <div className="flex flex-col w-full">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          <div className="ml-auto flex items-center gap-x-5">
+          <div className="ml-auto flex items-center gap-x-5 ">
             <ThemeToggle />
 
             <DropdownMenu>
