@@ -31,7 +31,7 @@ export async function GET() {
 
   return NextResponse.redirect(
     process.env.NODE_ENV === "production"
-      ? "https://www.adsbyahsan.com/dasboard"
+      ? "https://www.adsbyahsan.com/dashboard"
       : "http://localhost:3000/dashboard"
   );
 }
