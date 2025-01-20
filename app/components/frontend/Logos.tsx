@@ -12,17 +12,17 @@ export function Logos() {
         <Image
           src={KindeLogo}
           alt="Logo"
-          className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert"
+          className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert hidden xl:flex"
         />
         <Image
           src={Nextjs}
           alt="Logo"
-          className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert"
+          className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert hidden xl:flex"
         />
         <Image
           src={KindeLogo}
           alt="Logo"
-          className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert"
+          className="col-span-2 max-h-12 w-full object-contain lg:col-span-1 dark:invert hidden xl:flex"
         />
         <Image
           src={Nextjs}

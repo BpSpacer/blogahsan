@@ -230,11 +230,11 @@ export async function CreateSubscription() {
       },
       success_url:
         process.env.NODE_ENV === "production"
-          ? "https://blogahsan.vercel.app/dashboard/payment/success"
+          ? "https://www.adsbyahsan.com/dashboard/payment/success"
           : "http://localhost:3000/dashboard/payment/success",
       cancel_url:
         process.env.NODE_ENV === "production"
-          ? "https://blogahsan.vercel.app/dashboard/payment/cancelled"
+          ? "https://www.adsbyahsan.com/dashboard/payment/cancelled"
           : "http://localhost:3000/dashboard/payment/cancelled",
     });
 

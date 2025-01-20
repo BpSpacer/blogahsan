@@ -41,7 +41,7 @@ export default async function PricingPage() {
       customer: data?.User?.customerId as string,
       return_url:
         process.env.NODE_ENV === "production"
-          ? "https://blogahsan.vercel.app/dashboard"
+          ? "https://www.adsbyahsan.com/dashboard"
           : "http://localhost:3000/dashboard",
     });
 

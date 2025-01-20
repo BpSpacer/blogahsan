@@ -75,7 +75,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <LogoutLink>Log out</LogoutLink>
+                    <LogoutLink>Log out</LogoutLink>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

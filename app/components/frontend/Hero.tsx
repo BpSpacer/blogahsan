@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/logo-dark.png";
@@ -9,6 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import HeroImage from "@/public/hero.png";
 import HeroSmall from '@/public/herosm.png';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 
 export function Hero() {
   return (
@@ -63,6 +66,14 @@ export function Hero() {
               </RegisterLink>
             </div>
           </div>
+          <div
+              className="w-48 h-48 justify-end items-end absolute top-5 right-5 z-10 mt-56 hidden xl:flex"
+              style={{
+                transform: "", 
+              }}
+            >
+              <DotLottieReact src="/arrow.lottie" loop autoplay />
+            </div>
 
           <div className="relative items-center w-full py-12 mx-auto mt-12">
             <svg
@@ -120,6 +131,8 @@ export function Hero() {
                 </filter>
               </defs>
             </svg>
+
+
 
             {/* Hero Image for larger screens */}
             <Image

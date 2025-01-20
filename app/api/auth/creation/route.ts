@@ -31,7 +31,7 @@ export async function GET() {
 
   return NextResponse.redirect(
     process.env.NODE_ENV === "production"
-      ? "https://blogahsan.vercel.app/dasboard"
+      ? "https://www.adsbyahsan.com/dasboard"
       : "http://localhost:3000/dashboard"
   );
 }
