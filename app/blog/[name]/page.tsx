@@ -111,7 +111,7 @@ export default async function BlogIndexPage({
       </nav>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-        {data.posts.map((item) => (
+        {data.posts.map((item: any) => (
           <Card key={item.id}>
             <Image
               src={item.image ?? Defaultimage}

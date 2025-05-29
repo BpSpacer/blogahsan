@@ -56,7 +56,7 @@ export default async function SitesRoute() {
         />
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-          {data.map((item) => (
+          {data.map((item: any) => (
             <Card key={item.id}>
               <Image
                 src={item.imageUrl ?? Defaultimage}

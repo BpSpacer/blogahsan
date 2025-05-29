@@ -9,7 +9,7 @@ export function DashboardItems() {
   const pathname = usePathname();
   return (
     <>
-      {navLinks.map((item) => (
+      {navLinks.map((item: any) => (
         <Link
           href={item.href}
           key={item.name}

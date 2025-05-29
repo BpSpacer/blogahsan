@@ -11,6 +11,7 @@ import { Check } from "lucide-react";
 import { SubmitButton } from "../dashboard/SubmitButtons";
 import Link from "next/link";
 import { CreateSubscription } from "@/app/action";
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode, Key } from "react";
 
 interface iAppProps {
   id: number;
@@ -63,7 +64,7 @@ export function PricingTable() {
       </p>
 
       <div className="grid grid-cols-1 gap-8 mt-16 lg:grid-cols-2">
-        {PricingPlans.map((item) => (
+        {PricingPlans.map((item: any) => (
           <Card key={item.id} className={item.id === 1 ? "border-primary" : ""}>
             <CardHeader>
               <CardTitle>
@@ -87,7 +88,7 @@ export function PricingTable() {
               </p>
 
               <ul className="mt-8 space-y-3 text-sm leading-6 text-muted-foreground">
-                {item.benefits.map((benefit, index) => (
+                {item.benefits.map((benefit: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | Iterable<ReactNode> | null | undefined, index: Key | null | undefined) => (
                   <li key={index} className="flex gap-x-3">
                     <Check className="text-primary size-5" />
 
