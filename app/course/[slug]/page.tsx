@@ -34,7 +34,7 @@ export default async function SlugPage({
     <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700 px-4 sm:px-6 lg:px-8">
       <header className="pt-6 xl:pb-6 text-center">
   <div className="space-y-2">
-    <p className="text-base font-medium leading-6 text-teal-500">
+    <p className="text-base font-medium leading-6 text-primary">
       {new Date(data._createdAt).toISOString().split("T")[0]}
     </p>
 
@@ -50,7 +50,7 @@ export default async function SlugPage({
 
     <div className="mt-4 text-center space-y-1">
       {data.type && (
-        <p className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase">
+        <p className="text-sm font-semibold text-primary dark:text-primary uppercase bg-primary/20 dark:bg-primary/20 inline-block px-3 py-1 rounded-full">
           {data.type}
         </p>
       )}
@@ -85,12 +85,12 @@ export default async function SlugPage({
         </div>
 
         {data.actionLink?.url && (
-          <div className="pt-6 text-center">
+          <div className="pt-12 mb-12 text-center">
             <a
               href={data.actionLink.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded-md bg-teal-500 px-6 py-3 text-white font-semibold hover:bg-teal-600 transition"
+              className="inline-block rounded-md bg-primary px-6 py-3 text-white font-semibold hover:bg-primary/80 transition"
             >
               {data.actionLink.label || "Learn More"}
             </a>
