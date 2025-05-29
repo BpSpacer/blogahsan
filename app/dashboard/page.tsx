@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { EmptyState } from "../components/dashboard/EmptyState";
-import prisma from "../utils/db";
+import {prisma} from "../utils/db";
 import { requireUser } from "../utils/requireUser";
 import Image from "next/image";
 import Defaultimage from "@/public/default.png";
