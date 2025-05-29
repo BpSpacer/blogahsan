@@ -1,6 +1,6 @@
 import { Course } from "@/app/lib/sanityinterface";
 import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { urlForImage } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 
 async function getData(slug: string) {
@@ -20,7 +20,7 @@ export default async function SlugPage({
     types: {
       image: ({ value }: { value: any }) => (
         <img
-          src={urlFor(value).url()}
+          src={urlForImage(value).url()}
           alt={value.alt || "Image"}
           className="rounded-lg my-6"
           width={800}
@@ -64,7 +64,7 @@ export default async function SlugPage({
     {data.titleImage && (
       <div className="mt-6 flex justify-center">
         <img
-          src={urlFor(data.titleImage).url()}
+          src={urlForImage(data.titleImage).url()}
           alt={data.titleImage.alt || "Title Image"}
           width={600}
           height={300}
