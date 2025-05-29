@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
 import { PostSchema, SiteCreationSchema } from "./utils/zodSchemas";
-import prisma from "./utils/db";
+import {prisma} from "./utils/db";
 import { requireUser } from "./utils/requireUser";
 import { stripe } from "./utils/stripe";
 
