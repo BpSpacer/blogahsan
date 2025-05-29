@@ -1,6 +1,6 @@
 import { SubmitButton } from "@/app/components/dashboard/SubmitButtons";
 import { PricingTable } from "@/app/components/shared/Pricing";
-import prisma from "@/app/utils/db";
+import {prisma} from "@/app/utils/db";
 import { requireUser } from "@/app/utils/requireUser";
 import { stripe } from "@/app/utils/stripe";
 import {
