@@ -145,7 +145,7 @@ export default async function SiteIdRoute({
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {data.posts.map((item) => (
+                  {data.posts.map((item: any) => (
                     <TableRow key={item.id}>
                       <TableCell>
                         <Image
