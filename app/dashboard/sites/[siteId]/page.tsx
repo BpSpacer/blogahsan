@@ -1,5 +1,5 @@
 import { EmptyState } from "@/app/components/dashboard/EmptyState";
-import {prisma} from "@/app/utils/db";
+import { prisma } from "@/app/utils/db";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,7 +28,6 @@ import {
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import {
   Book,
-  FileIcon,
   MoreHorizontal,
   PlusCircle,
   Settings,
@@ -38,24 +37,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function getData(userId: string, siteId: string) {
-  /* const data = await prisma.post.findMany({
-    where: {
-      id: siteId,
-      userId: userId,
-    },
-    select: {
-      image: true,
-      title: true,
-      createdAt: true,
-      id: true,
-      Site: {
-        select: {
-          subdirectory: true,
-        },
-      },
-    },
-  }); */
-
   const data = await prisma.site.findUnique({
     where: {
       id: siteId,
@@ -96,22 +77,22 @@ export default async function SiteIdRoute({
 
   return (
     <>
-      <div className="flex w-full justify-end gap-x-4">
-        <Button asChild variant="secondary">
+      <div className="flex flex-wrap gap-4 justify-end mb-6 px-2 sm:px-0">
+        <Button asChild variant="secondary" className="whitespace-nowrap">
           <Link href={`/blog/${data?.subdirectory}`}>
-            <Book className="size-4 mr-2" />
+            <Book className="h-5 w-5 mr-2" />
             View Blog
           </Link>
         </Button>
-        <Button asChild variant="secondary">
+        <Button asChild variant="secondary" className="whitespace-nowrap">
           <Link href={`/dashboard/sites/${params.siteId}/settings`}>
-            <Settings className="size-4 mr-2" />
+            <Settings className="h-5 w-5 mr-2" />
             Settings
           </Link>
         </Button>
-        <Button asChild>
+        <Button asChild className="whitespace-nowrap">
           <Link href={`/dashboard/sites/${params.siteId}/create`}>
-            <PlusCircle className="size-4 mr-2" />
+            <PlusCircle className="h-5 w-5 mr-2" />
             Create Article
           </Link>
         </Button>
@@ -125,7 +106,7 @@ export default async function SiteIdRoute({
           href={`/dashboard/sites/${params.siteId}/create`}
         />
       ) : (
-        <div>
+        <div className="overflow-x-auto px-2 sm:px-0">
           <Card>
             <CardHeader>
               <CardTitle>Articles</CardTitle>
@@ -133,8 +114,8 @@ export default async function SiteIdRoute({
                 Manage your Articles in a simple and intuitive interface
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Table>
+            <CardContent className="p-0">
+              <Table className="min-w-[600px]">
                 <TableHeader>
                   <TableRow>
                     <TableHead>Image</TableHead>
@@ -147,16 +128,18 @@ export default async function SiteIdRoute({
                 <TableBody>
                   {data.posts.map((item: any) => (
                     <TableRow key={item.id}>
-                      <TableCell>
-                        <Image
-                          src={item.image}
-                          width={64}
-                          height={64}
-                          alt="Article Cover Image"
-                          className="size-16 rounded-md object-cover"
-                        />
+                      <TableCell className="p-2">
+                        <div className="w-16 h-16 relative rounded-md overflow-hidden">
+                          <Image
+                            src={item.image}
+                            alt="Article Cover Image"
+                            fill
+                            sizes="64px"
+                            className="object-cover"
+                          />
+                        </div>
                       </TableCell>
-                      <TableCell className="font-medium">
+                      <TableCell className="font-medium max-w-xs truncate">
                         {item.title}
                       </TableCell>
                       <TableCell>
@@ -167,17 +150,17 @@ export default async function SiteIdRoute({
                           Published
                         </Badge>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="whitespace-nowrap">
                         {new Intl.DateTimeFormat("en-US", {
                           dateStyle: "medium",
-                        }).format(item.createdAt)}
+                        }).format(new Date(item.createdAt))}
                       </TableCell>
 
                       <TableCell className="text-end">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button size="icon" variant="ghost">
-                              <MoreHorizontal className="size-4" />
+                              <MoreHorizontal className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">

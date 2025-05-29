@@ -1,5 +1,5 @@
 import Head from "next/head";
-import {prisma} from "@/app/utils/db";
+import { prisma } from "@/app/utils/db";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Logo from "@/public/logo-dark.png";
@@ -14,6 +14,7 @@ import {
 import Defaultimage from "@/public/default.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Share from "@/app/components/dashboard/Share";
 
 // Define Post and SiteWithPosts types
 type Post = {
@@ -26,6 +27,7 @@ type Post = {
 };
 
 type SiteWithPosts = {
+  description: string;
   name: string;
   posts: Post[];
 };
@@ -38,6 +40,7 @@ async function getData(subDir: string): Promise<SiteWithPosts> {
     },
     select: {
       name: true,
+      description: true,
       posts: {
         select: {
           smallDescription: true,
@@ -98,15 +101,32 @@ export default async function BlogIndexPage({
         />
       </Head>
 
-      <nav className="grid grid-cols-3 my-10">
-        <div className="col-span-1" />
-        <div className="flex items-center gap-x-4 justify-center">
-          <Image src={Logo} alt="Logo" width={40} height={40} />
-          <h1 className="text-3xl font-semibold tracking-tight">{data.name}</h1>
-        </div>
+      <nav className="my-10">
+        <div className="flex flex-col items-center gap-2 sm:grid sm:grid-cols-3 sm:items-center">
+          {/* Left empty on sm+ */}
+          <div className="hidden sm:block" />
 
-        <div className="col-span-1 flex w-full justify-end">
-          <ThemeToggle />
+          {/* Center: logo + name + description stacked vertically */}
+          <div className="flex flex-col items-center text-center">
+            <Image src={Logo} alt="Logo" width={40} height={40} />
+            <h1 className="text-xl sm:text-3xl font-semibold tracking-tight mt-1">
+              {data.name}
+            </h1>
+            {/* Description below name - now visible on all screens */}
+            <p className="mt-1 text-sm text-muted-foreground max-w-xs sm:max-w-md">
+              {data.description}.
+            </p>
+          </div>
+
+          {/* Right: ThemeToggle on sm+ only */}
+          <div className="flex w-full justify-center sm:justify-end gap-2 mt-4 sm:mt-0">
+            <ThemeToggle />
+            <div className="-translate-y-1 transform">
+              <Share />
+            </div>
+
+          </div>
+
         </div>
       </nav>
 
@@ -130,7 +150,7 @@ export default async function BlogIndexPage({
             <CardFooter>
               <Button asChild className="w-full">
                 <Link href={`/blog/${params.name}/${item.slug}`}>
-                  Read more
+                  Read more...
                 </Link>
               </Button>
             </CardFooter>

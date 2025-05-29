@@ -1,4 +1,4 @@
-import {prisma} from "@/app/utils/db";
+import { prisma } from "@/app/utils/db";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,10 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { FileIcon, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import Defaultimage from "@/public/default.png";
 import { EmptyState } from "@/app/components/dashboard/EmptyState";
 
@@ -38,10 +38,10 @@ export default async function SitesRoute() {
   const data = await getData(user.id);
   return (
     <>
-      <div className="flex w-full justify-end">
-        <Button asChild>
+      <div className="flex w-full justify-end mb-4 px-2 sm:px-0">
+        <Button asChild className="whitespace-nowrap">
           <Link href={"/dashboard/sites/new"}>
-            <PlusCircle className="mr-2 size-4" /> Create Site
+            <PlusCircle className="mr-2 h-5 w-5" /> Create Site
           </Link>
         </Button>
       </div>
@@ -55,28 +55,29 @@ export default async function SitesRoute() {
           href="/dashboard/sites/new"
         />
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 px-2 sm:px-0 max-w-full">
           {data.map((item: any) => (
-            <Card key={item.id}>
-              <Image
-                src={item.imageUrl ?? Defaultimage}
-                alt={item.name}
-                className="rounded-t-lg object-cover w-full h-[200px]"
-                width={400}
-                height={200}
-              />
-              <CardHeader>
+            <Card key={item.id} className="flex flex-col">
+              <div className="relative w-full h-48 sm:h-52 lg:h-56">
+                <Image
+                  src={item.imageUrl ?? Defaultimage}
+                  alt={item.name}
+                  className="rounded-t-lg object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw,
+                         (max-width: 1024px) 50vw,
+                         33vw"
+                  priority={false}
+                />
+              </div>
+              <CardHeader className="flex-1">
                 <CardTitle className="truncate">{item.name}</CardTitle>
-                <CardDescription className="line-clamp-3">
-                  {item.description}
-                </CardDescription>
+                <CardDescription className="line-clamp-3">{item.description}</CardDescription>
               </CardHeader>
 
               <CardFooter>
                 <Button asChild className="w-full">
-                  <Link href={`/dashboard/sites/${item.id}`}>
-                    View Articles
-                  </Link>
+                  <Link href={`/dashboard/sites/${item.id}`}>View Articles</Link>
                 </Button>
               </CardFooter>
             </Card>
