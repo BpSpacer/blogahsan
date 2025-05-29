@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardDescription,
@@ -12,18 +14,25 @@ import Image from "next/image";
 import Defaultimage from "@/public/default.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Site, Post } from "@prisma/client";
 
-async function getData(userId: string): Promise<{ sites: Site[]; articles: Post[] }> {
+async function getData(userId: string) {
   const [sites, articles] = await Promise.all([
     prisma.site.findMany({
-      where: { userId },
-      orderBy: { createdAt: "desc" },
+      where: {
+        userId: userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
       take: 3,
     }),
     prisma.post.findMany({
-      where: { userId },
-      orderBy: { createdAt: "desc" },
+      where: {
+        userId: userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
       take: 3,
     }),
   ]);
@@ -38,10 +47,9 @@ export default async function DashboardIndexPage() {
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-5">Your Sites</h1>
-
       {sites.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-          {sites.map((item: Site) => (
+          {sites.map((item: any) => (
             <Card key={item.id}>
               <Image
                 src={item.imageUrl ?? Defaultimage}
@@ -69,18 +77,17 @@ export default async function DashboardIndexPage() {
         </div>
       ) : (
         <EmptyState
-          title="You don't have any sites created"
-          description="You currently don't have any Sites. Please create some so that you can see them right here."
+          title="You don’t have any sites created"
+          description="You currently don’t have any Sites. Please create some so that you can see them right here."
           href="/dashboard/sites/new"
           buttonText="Create Site"
         />
       )}
 
       <h1 className="text-2xl mt-10 font-semibold mb-5">Recent Articles</h1>
-
       {articles.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-          {articles.map((item: Post) => (
+          {articles.map((item: any) => (
             <Card key={item.id}>
               <Image
                 src={item.image ?? Defaultimage}
@@ -109,7 +116,7 @@ export default async function DashboardIndexPage() {
       ) : (
         <EmptyState
           title="You don't have any articles created"
-          description="You currently don't have any articles. Please create some so that you can see them right here."
+          description="You currently don't have any articles created. Please create some so that you can see them right here."
           buttonText="Create Article"
           href="/dashboard/sites"
         />
