@@ -15,7 +15,23 @@ import Defaultimage from "@/public/default.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-async function getData(subDir: string) {
+// Define Post and SiteWithPosts types
+type Post = {
+  id: string;
+  title: string;
+  smallDescription: string;
+  image: string | null;
+  createdAt: Date;
+  slug: string;
+};
+
+type SiteWithPosts = {
+  name: string;
+  posts: Post[];
+};
+
+// Typed async function
+async function getData(subDir: string): Promise<SiteWithPosts> {
   const data = await prisma.site.findUnique({
     where: {
       subdirectory: subDir,
@@ -39,7 +55,7 @@ async function getData(subDir: string) {
   });
 
   if (!data) {
-    return notFound();
+    notFound(); // This throws, so return type is still valid
   }
 
   return data;
