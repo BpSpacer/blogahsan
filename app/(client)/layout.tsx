@@ -45,13 +45,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.className} ${geistMono.className}`}>
-        <ThemeProvider>
-          <main className="h-full mx-auto max-w-5xl px-6">{children}</main>
-          <Analytics />
-        </ThemeProvider>
-      </body>
-    </html>
+<html lang="en" suppressHydrationWarning>
+  <body
+    className={`${geistSans.className} ${geistMono.className}  transition-colors`}
+  >
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <main className="h-full mx-auto max-w-5xl px-6">{children}</main>
+      <Analytics />
+    </ThemeProvider>
+  </body>
+</html>
+
   );
 }
