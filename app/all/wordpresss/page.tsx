@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { simpleCourseCard } from "@/app/lib/sanityinterface";
+import { simpleWordpressCard } from "@/app/lib/sanityinterface";
 import { client } from "@/sanity/lib/client";
 
 async function getData() {
-  const query = `*[_type == "course"]{
+  const query = `*[_type == "wordoress"]{
     title,
     "currentSlug": slug.current,
     description,
@@ -18,7 +18,7 @@ async function getData() {
 }
 
 export default async function PostsPage() {
-  const data = (await getData()) as simpleCourseCard[];
+  const data = (await getData()) as simpleWordpressCard[];
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -62,54 +62,54 @@ export default async function PostsPage() {
       {/* Foreground Content */}
       <div className="max-w-6xl mx-auto px-4 py-12 relative z-10">
         <h1 className="text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white">
-          All Courses
+          Wordpress
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.map((course) => (
+          {data.map((wordpress) => (
             <Link
-              key={course.currentSlug}
-              href={`/course/${course.currentSlug}`}
+              key={wordpress.currentSlug}
+              href={`/all/wordpress/${wordpress.currentSlug}`}
               className="block border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 bg-white/90 dark:bg-gray-900/90 backdrop-blur"
             >
               <div className="p-4 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white line-clamp-1">
-                    {course.title}
+                    {wordpress.title}
                   </h3>
-                  {course.type && (
+                  {wordpress.type && (
                     <p className="text-sm font-semibold text-primary dark:text-primary uppercase">
-                      {course.type}
+                      {wordpress.type}
                     </p>
                   )}
                 </div>
 
-                {course.titleImage && (
+                {wordpress.titleImage && (
                   <div className="relative mb-4">
                     <img
-                      src={course.titleImage}
-                      alt={course.title}
+                      src={wordpress.titleImage}
+                      alt={wordpress.title}
                       className="w-full h-48 object-cover rounded-md"
                     />
-                    {typeof course.worth === "number" && (
+                    {typeof wordpress.worth === "number" && (
                       <div className="absolute top-2 right-2 bg-white/80 dark:bg-gray-800/80 text-primary text-sm font-semibold px-3 py-1 rounded-md shadow">
-                        ${course.worth.toFixed(2)}
+                        ${wordpress.worth.toFixed(2)}
                       </div>
                     )}
                   </div>
                 )}
 
                 <p className="text-gray-600 dark:text-gray-300 mb-2 line-clamp-1">
-                  {course.description}
+                  {wordpress.description}
                 </p>
                 <p className="text-gray-500 dark:text-gray-400 text-sm italic line-clamp-1">
-                  {course.content?.[0]?.children?.[0]?.text?.slice(0, 100) || "Read more..."}
+                  {wordpress.content?.[0]?.children?.[0]?.text?.slice(0, 100) || "Read more..."}
                 </p>
 
-                {course.publishedAt && (
+                {wordpress.publishedAt && (
                   <div className="mt-4 flex justify-center">
                     <p className="text-sm text-primary dark:text-primary">
-                      Published: {new Date(course.publishedAt).toISOString().split("T")[0]}
+                      Published: {new Date(wordpress.publishedAt).toISOString().split("T")[0]}
                     </p>
                   </div>
                 )}

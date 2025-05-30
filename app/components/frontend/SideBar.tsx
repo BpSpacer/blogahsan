@@ -55,7 +55,7 @@ export const SideBar = () => {
             <ul className="space-y-3 mt-8">
               <li>
                 <Link
-                  href="/courses"
+                  href="/all/courses"
                   className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
                   onClick={() => setIsOpen(false)}
                 >
@@ -64,7 +64,7 @@ export const SideBar = () => {
               </li>
               <li>
                 <Link
-                  href="/apps"
+                  href="/all/apps"
                   className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
                   onClick={() => setIsOpen(false)}
                 >
@@ -73,7 +73,7 @@ export const SideBar = () => {
               </li>
               <li>
                 <Link
-                  href="/shopifyy"
+                  href="/all/shopifyy"
                   className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
                   onClick={() => setIsOpen(false)}
                 >
@@ -82,7 +82,7 @@ export const SideBar = () => {
               </li>
               <li>
                 <Link
-                  href="/wordpresss"
+                  href="/all/wordpresss"
                   className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
                   onClick={() => setIsOpen(false)}
                 >
@@ -91,7 +91,7 @@ export const SideBar = () => {
               </li>
               <li>
                 <Link
-                  href="/softwares"
+                  href="/all/softwares"
                   className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
                   onClick={() => setIsOpen(false)}
                 >

@@ -1,6 +1,10 @@
 import { type SchemaTypeDefinition } from 'sanity'
 import courses from './courses'
+import apps from './apps'
+import shopify from './shopify'
+import wordpress from './wordpress'
+import softwares from './softwares'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [courses],
+  types: [courses, apps, shopify, wordpress, softwares],
 }
