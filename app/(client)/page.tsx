@@ -1,5 +1,3 @@
-import React from 'react'
-
-export default function Page() {
-  return <div>Ahsan</div>;
+export default function ClientPage() {
+  return <div>Page is under construction.</div>;
 }
