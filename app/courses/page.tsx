@@ -51,7 +51,7 @@ function PostsPageClient() {
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         {/* Your existing SVG background */}
-        {/* ... (keep your existing background SVG here) ... */}
+        
         <div className="absolute inset-0 bg-white/10 dark:bg-black/30 backdrop-blur-sm"></div>
       </div>
 
