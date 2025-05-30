@@ -5,6 +5,7 @@ import { Logos } from "./components/frontend/Logos";
 import { Features } from "./components/frontend/Features";
 import { PricingTable } from "./components/shared/Pricing";
 import { SideBar } from "./components/frontend/SideBar";
+import Footer from "./components/frontend/Footer";
 
 
 export default async function Home() {
@@ -24,6 +25,9 @@ export default async function Home() {
           <Logos />
           <Features />
           <PricingTable />
+          <div className="-mb-24">
+            <Footer/>
+          </div>
         </div>
       </div>
     </div>
