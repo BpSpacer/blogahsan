@@ -17,7 +17,7 @@ async function getServerSideData() {
     type,
     worth
   }`;
-  
+
   const data = await client.fetch(query);
   return data;
 }
@@ -25,7 +25,7 @@ async function getServerSideData() {
 export default async function PostsPage() {
   // Fetch data on the server
   const serverData = (await getServerSideData()) as simpleCourseCard[];
-  
+
   // Pass server-fetched data to client component
   return <PostsPageClient serverData={serverData} />;
 }
@@ -201,8 +201,9 @@ function PostsPageClient({ serverData }: { serverData: simpleCourseCard[] }) {
             </h2>
             {filteredCourses.length === 0 ? (
               <p className="text-center text-gray-500 dark:text-gray-400 py-8">
-                No courses found matching "{searchQuery}"
+                No courses found matching &quot;{searchQuery}&quot;
               </p>
+
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                 {filteredCourses.map((course) => renderCourseCard(course, "search-"))}
@@ -215,7 +216,7 @@ function PostsPageClient({ serverData }: { serverData: simpleCourseCard[] }) {
         <h2 className={`text-2xl font-semibold mb-4 ${searchQuery ? 'mt-10' : ''}`}>
           {searchQuery ? 'All Courses' : 'Browse All Courses'}
         </h2>
-        
+
         {allCourses.length === 0 ? (
           <p className="text-center text-gray-500 dark:text-gray-400 py-8">
             Loading courses...
