@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "../components/dashboard/ThemeProvider";
+import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
 
 const geistSans = localFont({
-  src: "../fonts/GeistVF.woff",
+  src: "/fonts/GeistVF.woff", // must be in /public/fonts
   variable: "--font-geist-sans",
 });
 const geistMono = localFont({
-  src: "../fonts/GeistMonoVF.woff",
+  src: "/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
 });
-
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://adsbyahsan.com/"),
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "Blog Ahsan – Free Blogs, Courses, Apps & More",
     description:
       "Publish your blogs for free and explore a wide variety of free educational and digital resources on Blog Ahsan.",
-    site: "@your_twitter_handle", // optional if you have one
+    site: "@your_twitter_handle",
   },
 };
 
@@ -49,6 +49,7 @@ export default function RootLayout({
       <body className={`${geistSans.className} ${geistMono.className}`}>
         <ThemeProvider>
           <main className="h-full mx-auto max-w-5xl px-6">{children}</main>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
