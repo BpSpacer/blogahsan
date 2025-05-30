@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
+import { client } from "@/sanity/lib/client";
 import { simpleCourseCard } from "@/app/lib/sanityinterface";
 
-async function getData() {
+// This function fetches data on the server side
+async function getServerSideData() {
   const query = `*[_type == "course"]{
     title,
     "currentSlug": slug.current,
@@ -16,28 +17,37 @@ async function getData() {
     type,
     worth
   }`;
+  
   const data = await client.fetch(query);
   return data;
 }
 
-export default function PostsPageWrapper() {
-  return <PostsPageClient />;
+export default async function PostsPage() {
+  // Fetch data on the server
+  const serverData = (await getServerSideData()) as simpleCourseCard[];
+  
+  // Pass server-fetched data to client component
+  return <PostsPageClient serverData={serverData} />;
 }
 
-function PostsPageClient() {
-  const [allCourses, setAllCourses] = useState<simpleCourseCard[]>([]);
-  const [filteredCourses, setFilteredCourses] = useState<simpleCourseCard[]>([]);
+function PostsPageClient({ serverData }: { serverData: simpleCourseCard[] }) {
+  const [allCourses, setAllCourses] = useState<simpleCourseCard[]>(serverData);
+  const [filteredCourses, setFilteredCourses] = useState<simpleCourseCard[]>(serverData);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Client-side fallback in case server data is empty
   useEffect(() => {
-    const fetchCourses = async () => {
-      const data = await getData();
-      setAllCourses(data);
-      setFilteredCourses(data);
-    };
-    fetchCourses();
-  }, []);
+    if (serverData.length === 0) {
+      const fetchClientData = async () => {
+        const clientData = await getServerSideData();
+        setAllCourses(clientData);
+        setFilteredCourses(clientData);
+      };
+      fetchClientData();
+    }
+  }, [serverData]);
 
+  // Filter courses based on search query
   useEffect(() => {
     const filtered = allCourses.filter((course) =>
       course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -99,22 +109,80 @@ function PostsPageClient() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Background */}
+      {/* Fullscreen Background SVG */}
       <div className="fixed inset-0 -z-10">
+        <svg
+          className="absolute -mt-24 blur-3xl"
+          fill="none"
+          viewBox="0 0 400 400"
+          height="100%"
+          width="100%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clipPath="url(#clip0_10_20)">
+            <g filter="url(#filter0_f_10_20)">
+              <path
+                d="M128.6 0H0V322.2L106.2 134.75L128.6 0Z"
+                fill="#03FFE0"
+              ></path>
+              <path
+                d="M0 322.2V400H240H320L106.2 134.75L0 322.2Z"
+                fill="#7C87F8"
+              ></path>
+              <path
+                d="M320 400H400V78.75L106.2 134.75L320 400Z"
+                fill="#4C65E4"
+              ></path>
+              <path
+                d="M400 0H128.6L106.2 134.75L400 78.75V0Z"
+                fill="#043AFF"
+              ></path>
+            </g>
+          </g>
+          <defs>
+            <filter
+              colorInterpolationFilters="sRGB"
+              filterUnits="userSpaceOnUse"
+              height="720.666"
+              id="filter0_f_10_20"
+              width="720.666"
+              x="-160.333"
+              y="-160.333"
+            >
+              <feFlood
+                floodOpacity="0"
+                result="BackgroundImageFix"
+              ></feFlood>
+              <feBlend
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                mode="normal"
+                result="shape"
+              ></feBlend>
+              <feGaussianBlur
+                result="effect1_foregroundBlur_10_20"
+                stdDeviation="80.1666"
+              ></feGaussianBlur>
+            </filter>
+          </defs>
+        </svg>
+
+        {/* Optional: darken slightly if too bright */}
         <div className="absolute inset-0 bg-white/10 dark:bg-black/30 backdrop-blur-sm"></div>
       </div>
 
-      {/* Foreground */}
+      {/* Foreground Content */}
       <div className="max-w-6xl mx-auto px-4 py-12 relative z-10">
-        <h1 className="text-4xl font-bold mb-6 text-center">
+        <h1 className="text-4xl font-bold mb-6 text-center text-gray-900 dark:text-white">
           All Courses
         </h1>
 
+        {/* Search Bar */}
         <div className="mb-6 flex justify-center sm:justify-end w-full">
           <div className="relative w-60 sm:w-64 max-w-full">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search courses..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2 pr-10 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary"
@@ -125,14 +193,16 @@ function PostsPageClient() {
           </div>
         </div>
 
-        {/* Search Results Section */}
+        {/* Search Results */}
         {searchQuery && (
           <>
             <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">
               Search Results
             </h2>
             {filteredCourses.length === 0 ? (
-              <p className="text-center text-gray-500 dark:text-gray-400">No matching courses found.</p>
+              <p className="text-center text-gray-500 dark:text-gray-400 py-8">
+                No courses found matching "{searchQuery}"
+              </p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                 {filteredCourses.map((course) => renderCourseCard(course, "search-"))}
@@ -141,11 +211,20 @@ function PostsPageClient() {
           </>
         )}
 
-        {/* All Courses Section */}
-        <h2 className="text-2xl font-semibold mb-4">All Courses</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allCourses.map((course) => renderCourseCard(course, "all-"))}
-        </div>
+        {/* All Courses */}
+        <h2 className={`text-2xl font-semibold mb-4 ${searchQuery ? 'mt-10' : ''}`}>
+          {searchQuery ? 'All Courses' : 'Browse All Courses'}
+        </h2>
+        
+        {allCourses.length === 0 ? (
+          <p className="text-center text-gray-500 dark:text-gray-400 py-8">
+            Loading courses...
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {allCourses.map((course) => renderCourseCard(course, "all-"))}
+          </div>
+        )}
       </div>
     </div>
   );
