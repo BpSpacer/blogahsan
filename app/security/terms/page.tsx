@@ -22,7 +22,7 @@ const TermsAndConditions = () => {
 
         <h2 className="text-3xl font-semibold mb-4">3. Use of the Site</h2>
         <p className="text-lg mb-6">
-          You agree to use the site for lawful purposes only and in a manner that does not infringe on the rights of, restrict, or inhibit anyone else's use of the site. Prohibited behavior includes harassment, causing distress, or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within the site.
+          You agree to use the site for lawful purposes only and in a manner that does not infringe on the rights of, restrict, or inhibit anyone else&apos;s use of the site. Prohibited behavior includes harassment, causing distress, or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within the site.
         </p>
 
         <h2 className="text-3xl font-semibold mb-4">4. Intellectual Property Rights</h2>
