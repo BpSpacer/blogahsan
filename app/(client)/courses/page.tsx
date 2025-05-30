@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { simpleCourseCard } from "../lib/sanityinterface";
 import { client } from "@/sanity/lib/client";
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
+import { simpleCourseCard } from "@/app/lib/sanityinterface";
 
 async function getData() {
   const query = `*[_type == "course"]{
@@ -39,14 +39,10 @@ function PostsPageClient() {
   }, []);
 
   useEffect(() => {
-    const query = searchQuery.toLowerCase().trim();
-
-    const filtered = allCourses.filter((course) => {
-      const title = course.title?.toLowerCase() || "";
-      const description = course.description?.toLowerCase() || "";
-      return title.includes(query) || description.includes(query);
-    });
-
+    const filtered = allCourses.filter((course) =>
+      course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      course.description?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     setFilteredCourses(filtered);
   }, [searchQuery, allCourses]);
 
@@ -54,6 +50,8 @@ function PostsPageClient() {
     <div className="relative min-h-screen overflow-hidden">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
+        {/* Your existing SVG background */}
+        
         <div className="absolute inset-0 bg-white/10 dark:bg-black/30 backdrop-blur-sm"></div>
       </div>
 
@@ -63,20 +61,20 @@ function PostsPageClient() {
           All Courses
         </h1>
 
-        <div className="mb-6 flex justify-center sm:justify-end w-full">
-          <div className="relative w-60 sm:w-64 max-w-full">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2 pr-10 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary"
-            />
-            <span className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">
-              <Search className="w-4 h-4" />
-            </span>
-          </div>
-        </div>
+<div className="mb-6 flex justify-center sm:justify-end w-full">
+  <div className="relative w-60 sm:w-64 max-w-full">
+    <input
+      type="text"
+      placeholder="Search..."
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className="w-full border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2 pr-10 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary"
+    />
+    <span className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">
+      <Search className="w-4 h-4" />
+    </span>
+  </div>
+</div>
 
         {filteredCourses.length === 0 ? (
           <p className="text-center text-gray-500 dark:text-gray-400">No courses found.</p>
