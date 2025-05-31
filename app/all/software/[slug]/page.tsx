@@ -3,6 +3,8 @@ import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 
+export const revalidate = 60;
+
 async function getData(slug: string) {
   const query = `*[_type == "software" && slug.current == "${slug}"][0]`;
   const data = await client.fetch(query);

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { simpleSoftwareCard } from "@/app/lib/sanityinterface";
 import { client } from "@/sanity/lib/client";
 
+export const revalidate = 60;
+
 async function getData() {
   const query = `*[_type == "software"]{
     title,
