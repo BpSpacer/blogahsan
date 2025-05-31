@@ -97,7 +97,15 @@ export const SideBar = () => {
                 >
                   Softwares
                 </Link>
-                
+              </li>
+                            <li>
+                <Link
+                  href="/all/accounts"
+                  className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Accounts
+                </Link>
               </li>
             </ul>
           </nav>

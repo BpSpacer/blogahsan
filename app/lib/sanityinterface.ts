@@ -161,4 +161,35 @@ export interface Software {
   worth: number;
 }
 
+/////////
 
+export interface simpleAccountCard {
+  title: string;
+  description: string;
+  currentSlug: string;
+  content: any;
+  titleImage: string;
+  publishedAt: string;
+  type: "FREE" | "PAID";
+  worth: number;
+}
+
+export interface Account {
+  titleImage: any;
+  description: any;
+  title: string;
+  overview: string;
+  content: any;
+  _id: string;
+  slug: {
+    current: string;
+  };
+  _createdAt: string;
+  actionLink?: {
+    label: string;
+    url: string;
+  };
+  publishedAt: string;
+  type: "FREE" | "PAID";
+  worth: number;
+}
