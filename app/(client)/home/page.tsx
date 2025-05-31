@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client";
-import Header from "../components/Header";
-import { Post } from "../utils/interface";
-import PostComponent from "../components/PostComponent";
+import Header from "../../components/Header";
+import { Post } from "../../utils/interface";
+import PostComponent from "../../components/PostComponent";
 
 async function getPosts() {
   const query = `
