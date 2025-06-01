@@ -7,7 +7,9 @@ import softwares from './softwares'
 import { post } from './post'
 import { comment } from './comment'
 import { tag } from './tag'
+import accounts from './accounts'
+
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [courses, apps, shopify, wordpress, softwares, post, comment, tag],
+  types: [courses, apps, shopify, wordpress, softwares, accounts, post, comment, tag],
 }
