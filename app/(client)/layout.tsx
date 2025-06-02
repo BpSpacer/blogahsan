@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "../components/dashboard/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
+import Head from "next/head";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -46,6 +47,11 @@ export default function RootLayout({
 }) {
   return (
 <html lang="en" suppressHydrationWarning>
+        <Head>
+        <meta name="google-adsense-account" content="ca-pub-1973129170732368" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1973129170732368"
+          crossOrigin="anonymous"></script>
+      </Head>
   <body
     className={`${geistSans.className} ${geistMono.className}  transition-colors`}
   >
