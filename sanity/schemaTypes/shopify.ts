@@ -67,7 +67,7 @@ export default {
     {
       name: 'worth',
       type: 'number',
-      title: 'Course Worth (in USD)',
+      title: 'Theme/Plugin Worth (in USD)',
     },
     {
       name: 'publishedAt',

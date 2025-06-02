@@ -59,7 +59,7 @@ export default {
     {
       name: 'type',
       type: 'string',
-      title: 'software Type',
+      title: 'Software Type',
       options: {
         list: ['FREE', 'PAID'],
         layout: 'radio',

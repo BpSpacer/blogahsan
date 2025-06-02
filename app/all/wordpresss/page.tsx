@@ -5,7 +5,7 @@ import { client } from "@/sanity/lib/client";
 export const revalidate = 60;
 
 async function getData() {
-  const query = `*[_type == "wordoress"]{
+  const query = `*[_type == "wordpress"]{
     title,
     "currentSlug": slug.current,
     description,
