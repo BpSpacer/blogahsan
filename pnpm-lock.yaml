@@ -18,7 +18,7 @@ importers:
         specifier: ^2.3.6
         version: 2.6.2(next@15.0.0-rc.0(@babel/core@7.27.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
       '@lottiefiles/dotlottie-react':
-        specifier: ^0.12.1
+        specifier: ^0.12.3
         version: 0.12.3(react@19.0.0-rc-f994737d14-20240522)
       '@portabletext/react':
         specifier: ^3.2.1
