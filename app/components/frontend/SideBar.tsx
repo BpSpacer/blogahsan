@@ -109,6 +109,15 @@ export const SideBar = () => {
               </li>
               <li>
                 <Link
+                  href="/all/movies"
+                  className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Movies
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/tag"
                   className="block px-4 py-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-300 md:text-gray-600"
                   onClick={() => setIsOpen(false)}

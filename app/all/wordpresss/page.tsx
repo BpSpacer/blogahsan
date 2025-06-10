@@ -91,7 +91,7 @@ export default async function PostsPage() {
                     <img
                       src={wordpress.titleImage}
                       alt={wordpress.title}
-                      className="w-full h-48 object-cover rounded-md"
+                      className="w-full h-full object-cover rounded-md"
                     />
                     {typeof wordpress.worth === "number" && (
                       <div className="absolute top-2 right-2 bg-white/80 dark:bg-gray-800/80 text-primary text-sm font-semibold px-3 py-1 rounded-md shadow">

@@ -1,26 +1,32 @@
 import Link from "next/link";
-import { simpleSoftwareCard } from "@/app/lib/sanityinterface";
+import { simpleMovieCard } from "@/app/lib/sanityinterface";
 import { client } from "@/sanity/lib/client";
+import React from 'react';
+import { Volume2 } from 'lucide-react';
+import { Clapperboard } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 export const revalidate = 60;
 
 async function getData() {
-  const query = `*[_type == "software"]{
+  const query = `*[_type == "movie"]{
     title,
     "currentSlug": slug.current,
     description,
     content,
     "titleImage": titleImage.asset->url,
     publishedAt,
-    type,
-    worth
+    rating,
+    audioLanguages,
+    genre,
+    quality
   }`;
   const data = await client.fetch(query);
   return data;
 }
 
 export default async function PostsPage() {
-  const data = (await getData()) as simpleSoftwareCard[];
+  const data = (await getData()) as simpleMovieCard[];
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -64,54 +70,71 @@ export default async function PostsPage() {
       {/* Foreground Content */}
       <div className="max-w-6xl mx-auto px-4 py-12 relative z-10">
         <h1 className="text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white">
-          All Softwares
+          All Movies
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.map((software) => (
+          {data.map((movie) => (
             <Link
-              key={software.currentSlug}
-              href={`/all/software/${software.currentSlug}`}
+              key={movie.currentSlug}
+              href={`/all/movie/${movie.currentSlug}`}
               className="block border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 bg-white/90 dark:bg-gray-900/90 backdrop-blur"
             >
               <div className="p-4 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white line-clamp-1">
-                    {software.title}
+                    {movie.title}
                   </h3>
-                  {software.type && (
-                    <p className="text-sm font-semibold text-primary dark:text-primary uppercase">
-                      {software.type}
+                  {movie.rating && (
+                    <p className="text-sm font-semibold text-primary dark:text-primary items-center flex space-x-1 ">
+                      <Star  className="h-4 w-4 animate-spin mr-3"/> {movie.rating}
                     </p>
                   )}
                 </div>
 
-                {software.titleImage && (
+                {movie.titleImage && (
                   <div className="relative mb-4">
                     <img
-                      src={software.titleImage}
-                      alt={software.title}
+                      src={movie.titleImage}
+                      alt={movie.title}
                       className="w-full h-full object-cover rounded-md"
                     />
-                    {typeof software.worth === "number" && (
+                    {movie.quality && (
                       <div className="absolute top-2 right-2 bg-white/80 dark:bg-gray-800/80 text-primary text-sm font-semibold px-3 py-1 rounded-md shadow">
-                        ${software.worth.toFixed(2)}
+                        {movie.quality}
                       </div>
                     )}
                   </div>
                 )}
 
                 <p className="text-gray-600 dark:text-gray-300 mb-2 line-clamp-1">
-                  {software.description}
+                  {movie.description}
                 </p>
                 <p className="text-gray-500 dark:text-gray-400 text-sm italic line-clamp-1">
-                  {software.content?.[0]?.children?.[0]?.text?.slice(0, 100) || "Read more..."}
+                  {movie.content?.[0]?.children?.[0]?.text?.slice(0, 100) || "Read more..."}
                 </p>
 
-                {software.publishedAt && (
+                {(movie.genre || movie.audioLanguages) && (
+                  <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 space-y-1">
+                    {movie.genre && movie.genre.length > 0 && (
+                      <div className="inline-flex items-center space-x-1">
+                        <Clapperboard className="px-1 text-primary"/>
+                        {movie.genre.join(", ")}
+                      </div>
+                    )}
+                    {movie.audioLanguages && movie.audioLanguages.length > 0 && (
+                      <div className="inline-flex items-center space-x-1">
+                         <Volume2 className="px-1 text-primary"/>
+                        {movie.audioLanguages.join(", ")}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {movie.publishedAt && (
                   <div className="mt-4 flex justify-center">
                     <p className="text-sm text-primary dark:text-primary">
-                      Published: {new Date(software.publishedAt).toISOString().split("T")[0]}
+                      Released: {new Date(movie.publishedAt).toISOString().split("T")[0]}
                     </p>
                   </div>
                 )}
