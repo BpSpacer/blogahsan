@@ -32,10 +32,7 @@ export default function RootLayout({
         <meta name="google-adsense-account" content="ca-pub-1973129170732368" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1973129170732368"
           crossOrigin="anonymous"></script>
-        <script
-          async
-            src={`https://www.google.com/recaptcha/api.js?render=6LfBPF4rAAAAAAVSHSIcZjicPt5Hotj0hy8iHpnK`}
-        ></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
       </Head>
       <body className={`${geistSans.className} ${geistMono.className}`}>
         <ThemeProvider

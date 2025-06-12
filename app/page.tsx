@@ -6,7 +6,6 @@ import { Features } from "./components/frontend/Features";
 import { PricingTable } from "./components/shared/Pricing";
 import { SideBar } from "./components/frontend/SideBar";
 import Footer from "./components/frontend/Footer";
-import ContactForm from "./components/recapcha";
 
 export default async function Home() {
   const { getUser } = getKindeServerSession();
@@ -21,13 +20,16 @@ export default async function Home() {
       <SideBar />
       <div className="md:pl-64">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-          <ContactForm/>
+          <form action="/verify" method="POST">
+            <div className="g-recaptcha" data-sitekey="6LfBPF4rAAAAABXYHRE-rM8pz4Q1r2e9chEV333f"></div>
+            <button type="submit">Submit</button>
+          </form>
           <Hero />
           <Logos />
           <Features />
           <PricingTable />
           <div className="-mb-24">
-            <Footer/>
+            <Footer />
           </div>
         </div>
       </div>
