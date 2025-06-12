@@ -6,7 +6,7 @@ import { Features } from "./components/frontend/Features";
 import { PricingTable } from "./components/shared/Pricing";
 import { SideBar } from "./components/frontend/SideBar";
 import Footer from "./components/frontend/Footer";
-
+import ContactForm from "./components/recapcha";
 
 export default async function Home() {
   const { getUser } = getKindeServerSession();
@@ -21,6 +21,7 @@ export default async function Home() {
       <SideBar />
       <div className="md:pl-64">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+          <ContactForm/>
           <Hero />
           <Logos />
           <Features />
